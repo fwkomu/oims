@@ -1,0 +1,205 @@
+/*	Site Colors:
+	#1A446C - blue grey
+	#689DC1 - light blue
+	#D4E6F4 - very light blue
+	#EEE4B9 - light tan
+	#8D0D19 - burgundy
+	#ffffff - white
+	#0120b9 - bluish
+*/
+
+html { height: 100%; width: 100%; }
+body {
+	width: 100%; height: 100%;
+	margin: 0; padding: 0; border: 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px; line-height: 15px;
+	background: #EEE4B9;
+}
+img { border: none; }
+a { color: #8D0D19; }
+a:hover { color: #1A446C }
+
+#header {
+	height: 70px;
+	margin: 0; padding: 0; text-align: left;
+	background: #1A446C; color: #D4E6F4;
+}
+#header h1 { padding: 1em; margin: 0; }
+.header_link{
+	color: #D4E6F4;
+	position: relative;
+	left: 200px;
+}
+.header_link:hover{
+	color: #689DC1;
+}
+.login_out{
+	color: #8D0D19;
+	position: relative;
+	left: 1000px;
+	top: 30px;
+	font-size: 18px;
+}
+.login_out:hover{
+	color: #689DC1;
+}
+/* Causes page to go off
+#cuea_logo{
+	position: relative;
+	left: 400px;
+}
+#cuea_name{
+	position: relative;
+	left: 400px;
+}
+*/
+#main {
+	height: 600px; width: 100%;
+	margin: 0; padding: 0;
+	background: #EEE4B9;
+}
+#footer {
+	clear: both;
+	height: 2em; margin: 0; padding: 1em;
+	text-align: center;
+	background: #1A446C; color: #D4E6F4;
+}
+
+/* Navigation 
+#navigation {
+	float: left;
+	width: 150px; height: 100%;
+	margin: 0; padding: 0 2em;
+	color: #D4E6F4; background: #8D0D19;
+}
+#navigation a { color: #D4E6F4; text-decoration: none; }
+#navigation a:hover { color: #FFFFFF; }
+ul.subjects {
+	margin: 1em 0; padding-left: 0; list-style: none;
+}
+ul.pages { padding-left: 2em; list-style: square; font-weight: normal; }
+.selected { font-weight: bold; } */
+
+/* Page Content */
+#page {
+	float: left; height: 100%;
+	padding-left: 2em; vertical-align: top;
+	background: #EEE4B9;
+}
+#page h2 { color: #8D0D19; margin-top: 1em; }
+#page h3 { color: #8D0D19; }
+.view-content {
+	margin: 1em; padding: 1em; border: 1px solid #999;
+}
+/* Login Page */
+#login{
+	position: relative;
+	top: 80px;
+	left: 320px;
+	border: 1px solid #8D0D19;
+	margin: 0.2em 0; padding: 3em;
+}
+
+div.message {
+	border: 2px solid #8D0D19;
+	color: #8D0D19; font-weight: bold;
+	margin: 1em 0; padding: 1em;
+}
+
+/* errors */
+.error {
+	color: #8D0D19; border: 2px solid #8D0D19;
+	margin: 1em 0; padding: 1em;
+}
+.error ul { padding-left: 2em; }
+
+/* Css for dashboard positioning */
+div.dashboard {
+    width:190px;
+	height:50px;
+	padding: 1em;
+	padding-top: 1em;
+    margin: 1em;
+    border: 1px solid black;
+	border-radius: 5px; /* 5px rounded corners */
+}
+
+/* On mouse-over, add a shadow */
+.dashboard:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	color: #1A446C
+}
+
+#manage_admins{
+	position: relative;
+    top: 0px;
+    left: 0px;
+}
+#manage_students{
+	position: relative;
+	top: -90px;
+	left: 250px;
+
+}
+#manage_trainers{
+	position: relative;
+	top: -180px;
+	left: 500px;
+}
+#manage_supervisors{
+	position: relative;
+	top: -270px;
+	left: 750px;
+}
+#assign_supervisor{
+	position: relative;
+	bottom: 200px;
+	left: 0px;
+}
+#logs{
+	position: relative;
+	bottom: 290px;
+	left: 250px;
+}
+#ratings{
+	position: relative;
+	bottom: 380px;
+	left: 500px;
+}
+
+ /* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 120px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+} 
