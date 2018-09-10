@@ -528,6 +528,23 @@ function welcome_email( $too, $sub, $lusername, $lpassword ) {
 	}
 }
 
+function rating_email( $too, $sub , $total) {
+	$subject = $sub;
+
+	$to = $too;
+
+	$message = "<h3></h3><p>You were rated on our system. Your total score is:<br/><br/>$total<br/><br/>Thank you</p>";
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+	$headers .= 'From: Account Login Details <no-reply@itsphoenix.co.ke>' . "\r\n";
+
+	if ( mail( $to, $subject, $message, $headers ) ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 function supervision_email( $too, $sub, $lassigned_student, $lstudent_email, $ldate ) {
 	$subject = $sub;
 

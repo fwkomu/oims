@@ -21,7 +21,16 @@ function validate_presences($required_fields) {
 	foreach($required_fields as $field) {
 		$value = trim($_POST[$field]);
 		if (!has_presence($value)) {
-			$errors[$field] = fieldname_as_text($field) . " can't be blank"; 
+			$errors[$field] = fieldname_as_text($field) . " can't be blank";
+		}
+	}
+}
+
+function validate_radio_presences($required_fields) {
+	global $errors;
+	foreach($required_fields as $field) {
+		if (!isset($_POST[$field])) {
+			$errors[$field] = fieldname_as_text($field) . " can't be blank";
 		}
 	}
 }
