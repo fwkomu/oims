@@ -6,35 +6,47 @@
 <?php include( "../includes/layouts/header.php" ); ?>
 
 <?php
+
+/*
+ * Fetch students
+ */
+$student_set = find_all_students();
+
+/*
+ * Filter logs
+ */
 if ( isset( $_POST['submit'] ) ) {
 	//Process the form
 
 	// validations
-	$required_fields = array( "date_from", "date_to" );
+	$required_fields = array( "date_from", "date_to", "student" );
 	validate_presences( $required_fields );
 
 	if ( empty( $errors ) ) {
-		// Perform Create
 
-		$date_from = mysql_prep( $_GET["date_from"] );
-		$date_to   = mysql_prep( $_GET["date_to"] );
-		$entry     = mysql_prep( $_GET["entry"] );
+		/*
+		 * Filter logs
+		 */
+		$date_from      = mysql_prep( $_GET["date_from"] );
+		$date_to        = mysql_prep( $_GET["date_to"] );
+		$student_picked = mysql_prep( $_GET["student"] );
+		$entry          = mysql_prep( $_GET["entry"] );
 
 		// SELECT entry FROM logs
 		$query = "SELECT * FROM logs ";
-		$query .= "WHERE DATE >= '" . $date_from . "' AND DATE <= '" . $date_to . "'";
+		$query .= "WHERE username=" . $student_picked . " AND DATE >= '" . $date_from . "' AND DATE <= '" . $date_to . "'";
 
 		$result = mysqli_query( $connection, $query );
 
 		if ( $result ) {
 			//Success
-			if (mysqli_num_rows($result) <= 0){
-			    $result = false;
+			if ( mysqli_num_rows( $result ) <= 0 ) {
+				$result              = false;
 				$_SESSION["message"] = "No logs retrieved.";
-            } else{
+			} else {
 
 				$_SESSION["message"] = "Logs retrieved.";
-            }
+			}
 			//redirect_to("");
 		} else {
 			//Failure
@@ -59,11 +71,42 @@ if ( isset( $_POST['submit'] ) ) {
 
             <h2>View logs</h2>
             <form action="logs.php" method="GET">
-				<?php $today = date( "Y-m-d" ); ?>
+				<?php
+				/*
+				 * Validate previous filter
+				 */
+
+				// date_from
+				if ( isset($_GET['date_from']) ) {
+					$date_from_default = $_GET['date_from'];
+				} else {
+					$date_from_default = date( "Y-m-d" );
+				}
+				// date_to
+				if ( isset($_GET['date_to']) ) {
+					$date_to_default = $_GET['date_to'];
+				} else {
+					$date_to_default = date( "Y-m-d" );
+				}
+				// student
+				if ( isset($_GET['student']) ) {
+					$student_default = $_GET['student'];
+				} else {
+					$student_default = false;
+				}
+
+				?>
+                <label>Student</label>
+                <select name="student" required>
+                    <option disabled selected>Select a student</option>
+					<?php while ( $student = mysqli_fetch_assoc( $student_set ) ) { ?>
+                        <option <?php if ($student_default == $student['username']) echo 'selected' ?> value="<?= $student['username'] ?>"><?= $student['username'] ?></option>
+					<?php } ?>
+                </select>
                 <label>From</label>
-                <input type="date" name="date_from" value="<?php echo $today; ?>"/>
+                <input type="date" name="date_from" value="<?php echo $date_from_default; ?>"/>
                 <label>To</label>
-                <input type="date" name="date_to" value="<?php echo $today; ?>"/>
+                <input type="date" name="date_to" value="<?php echo $date_to_default; ?>"/>
                 <input type="submit" name="submit" value="Filter"/>
 
 
@@ -85,11 +128,11 @@ if ( isset( $_POST['submit'] ) ) {
 						<?php } ?>
 						<?php
 					} else {
-?>
+						?>
                         <tr>
                             <td colspan="3">No logs for the selected date range.</td>
                         </tr>
-                        <?php
+						<?php
 					}
 					?>
                 </table>
