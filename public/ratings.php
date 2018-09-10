@@ -66,6 +66,10 @@ if ( isset( $_POST['submit'] ) ) {
 
 		$total_rating = $documentation + $organization + $adaptability + $teamwork + $assignments + $presence + $communication + $mannerism + $understanding + $oral;
 
+		/*
+		 * TODO
+		 * Fetch and assign session user to rated_by
+		 */
 
 		$query  = "INSERT INTO rating (";
 		$query  .= " username, documentation, organization, adaptability,teamwork,assignments,presence,communication,mannerism,understanding,oral,total, comments, rated_by";
