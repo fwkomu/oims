@@ -26,6 +26,16 @@ function validate_presences($required_fields) {
 	}
 }
 
+function validate_get_presences($required_fields) {
+	global $errors;
+	foreach($required_fields as $field) {
+		$value = trim($_GET[$field]);
+		if (!has_presence($value)) {
+			$errors[$field] = fieldname_as_text($field) . " can't be blank";
+		}
+	}
+}
+
 function validate_radio_presences($required_fields) {
 	global $errors;
 	foreach($required_fields as $field) {

@@ -15,12 +15,12 @@ $student_set = find_all_students();
 /*
  * Filter logs
  */
-if ( isset( $_POST['submit'] ) ) {
+if ( isset( $_GET['submit'] ) ) {
 	//Process the form
 
 	// validations
 	$required_fields = array( "date_from", "date_to", "student" );
-	validate_presences( $required_fields );
+	validate_get_presences( $required_fields );
 
 	if ( empty( $errors ) ) {
 
@@ -34,7 +34,7 @@ if ( isset( $_POST['submit'] ) ) {
 
 		// SELECT entry FROM logs
 		$query = "SELECT * FROM logs ";
-		$query .= "WHERE username=" . $student_picked . " AND DATE >= '" . $date_from . "' AND DATE <= '" . $date_to . "'";
+		$query .= "WHERE username='" . $student_picked . "' AND DATE >= '" . $date_from . "' AND DATE <= '" . $date_to . "'";
 
 		$result = mysqli_query( $connection, $query );
 
@@ -50,7 +50,7 @@ if ( isset( $_POST['submit'] ) ) {
 			//redirect_to("");
 		} else {
 			//Failure
-			$_SESSION["message"] = "Log retrival failed";
+			$_SESSION["message"] = mysqli_error($connection);
 		}
 	}
 } else {
