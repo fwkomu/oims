@@ -67,14 +67,15 @@ if ( isset( $_POST['submit'] ) ) {
 		$total_rating = $documentation + $organization + $adaptability + $teamwork + $assignments + $presence + $communication + $mannerism + $understanding + $oral;
 
 		/*
-		 * TODO
+		 * //Done
 		 * Fetch and assign session user to rated_by
 		 */
+		$date_today = date( "Y-m-d" );
 
 		$query  = "INSERT INTO rating (";
-		$query  .= " username, documentation, organization, adaptability,teamwork,assignments,presence,communication,mannerism,understanding,oral,total, comments, rated_by";
+		$query  .= " username, documentation, organization, adaptability,teamwork,assignments,presence,communication,mannerism,understanding,oral,total, comments, rated_by, date";
 		$query  .= ") VALUES (";
-		$query  .= " '{$student}', '{$documentation}', '{$organization}', '{$adaptability}', '{$teamwork}', '{$assignments}', '{$presence}', '{$communication}', '{$mannerism}', '{$understanding}', '{$oral}', '{$total_rating}', '{$comments}', 'someone'";
+		$query  .= " '{$student}', '{$documentation}', '{$organization}', '{$adaptability}', '{$teamwork}', '{$assignments}', '{$presence}', '{$communication}', '{$mannerism}', '{$understanding}', '{$oral}', '{$total_rating}', '{$comments}', '{$_SESSION["username"]}', '{$date_today}'";
 		$query  .= ")";
 		$result = mysqli_query( $connection, $query );
 
