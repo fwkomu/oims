@@ -24,25 +24,10 @@ if ( isset( $_GET['submit'] ) ) {
 		/*
 		 * Retrieve Ratings
 		 */
-		$student_data = find_student_by_username( $_POST["student"] );
+		$student_data = find_student_by_username( $_GET["student"] );
 
 		
 		$student_picked = mysql_prep( $_GET["student"] );
-		$comments      = mysql_prep( $_GET["comments"] );
-		$documentation = mysql_prep( $_GET["documentation"] );
-		$organization  = mysql_prep( $_GET["organization"] );
-		$adaptability  = mysql_prep( $_GET["adaptability"] );
-		$teamwork      = mysql_prep( $_GET["teamwork"] );
-		$assignments   = mysql_prep( $_GET["assignments"] );
-		$presence      = mysql_prep( $_GET["presence"] );
-		$communication = mysql_prep( $_GET["communication"] );
-		$mannerism     = mysql_prep( $_GET["mannerism"] );
-		$understanding = mysql_prep( $_GET["understanding"] );
-		$oral          = mysql_prep( $_GET["oral"] );
-		$total = mysql_prep( $_GET["total"] );
-		$rated_by = mysql_prep( $_GET["rated_by"] );
-		$date = mysql_prep( $_GET['date'] );
-		$comments = mysql_prep( $_GET['comments'] );
 
 		// SELECT entry FROM rating
 		$query = "SELECT * FROM rating ";
@@ -174,7 +159,7 @@ if ( isset( $_GET['submit'] ) ) {
 					<tr>
                         <td>14.</td>
                         <td>Comments</td>
-						<td><?= $comments['comments'] ?></td>
+						<td><?= $rating['comments'] ?></td>
                     </tr>
 					
 						<?php } ?>
