@@ -21,15 +21,6 @@ if ( isset( $_GET['submit'] ) ) {
 
 	if ( empty( $errors ) ) {
 
-		/*
-		 * Get schedule entries
-		 */
-		$username = mysql_prep( $_GET["username"] );
-		$email = mysql_prep( $_GET["email"] );
-		$assigned_student = mysql_prep( $_GET["assigned_student"] );
-		$student_email = mysql_prep( $_GET["student_email"] );
-		$supervision_date = mysql_prep( $_GET['date'] );
-
 		// SELECT entry FROM schedule
 		$query = "SELECT * FROM schedule ";
 
@@ -80,11 +71,16 @@ if ( isset( $_GET['submit'] ) ) {
                     </tr>
 					<?php
 					if ( $result ) {
-						while ( $schedule_view = mysqli_fetch_assoc( $result ) ) { ?>
+						while ( $schedule_view = mysqli_fetch_assoc( $result ) ) {
+							$supervisor_details = find_supervisor_by_username($schedule_view['username']);
+						    $student_details = find_student_by_username($schedule_view['assigned_student']);
+						    ?>
                             <tr>
-                                <td><?= $schedule["username"] ?></td>
-                                <td><?= $schedule['DATE'] ?></td>
-                                <td><?= $schedule['ENTRY'] ?></td>
+                                <td><?= $schedule_view["username"] ?></td>
+                                <td><?= $supervisor_details['email'] ?></td>
+                                <td><?= $schedule_view["assigned_student"] ?></td>
+                                <td><?= $student_details['email'] ?></td>
+                                <td><?= $schedule_view['supervision_date'] ?></td>
                             </tr>
 						<?php } ?>
 						<?php
