@@ -4,7 +4,7 @@
 <?php require_once("../includes/validation_functions.php"); ?>
 
 <?php
-	$admin = find_user_by_id($_GET["id"]);
+	$admin = find_user_by_id($_GET["username"]);
 
 	if (!$admin) {
 		// admin ID was missing or invalid or
