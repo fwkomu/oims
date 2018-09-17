@@ -100,6 +100,8 @@ if ( isset( $_POST['submit'] ) ) {
 
     <div id="main">
         <div id="navigation">
+		<br />
+		<a href="supervisor.php">&laquo; Main menu</a><br /><br />
             &nbsp;
         </div>
         <div id="page">

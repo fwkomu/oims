@@ -142,7 +142,7 @@ if (isset($_POST['submit'])) {
 
                     <h2>Edit <?php echo htmlentities($_SESSION["username"]); ?>'s Profile</h2>
 					
-					//imported code
+					<!--imported code
 					<div class="message"><?php if(isset($message)) echo $message; ?></div>
 						<ul id="registration-step">
 						<li id="account" class="highlight">Account</li>
@@ -180,13 +180,12 @@ if (isset($_POST['submit'])) {
 					//end of imported code
 					
 					
-					
                     <ul id="registration-step">
 						<li id="personal" class="highlight">A. PERSONAL DETAILS (ATTACHEE)</li>
 						<li id="school">B. TRAINING INSTITUTION</li>
 						<li id="attachment">C.	DETAILS OF ATTACHMENT PLACE</li>
 						<li id="trainer">D.	INDUSTRIAL ATTACHMENT TRAINER</li>
-					</ul>
+					</ul>-->
 						
 					<form action="edit_profile.php" method="POST">
 						

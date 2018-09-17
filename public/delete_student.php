@@ -3,15 +3,15 @@
 <?php require_once("../includes/functions.php"); ?>
 
 <?php
-	$student = find_student_by_id($_GET["id"]);
+	$student = find_student_by_username($_GET["username"]);
 	if (!$student) {
-		// student ID was missing or invalid or
+		// student username was missing or invalid or
 		// student couldn't be found in database
 		redirect_to("manage_students.php");
 	}
 			
-			$id = $student["id"];
-			$query = "DELETE from users WHERE id = {$id} AND user_role = 'student' LIMIT 1";
+			$username = $student["username"];
+			$query = "DELETE from users WHERE username = {$username} AND user_role = 'student' LIMIT 1";
 			$result = mysqli_query($connection, $query);
 			
 			if($result && mysqli_affected_rows($connection) == 1) {

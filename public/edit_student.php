@@ -4,10 +4,10 @@
 <?php require_once("../includes/validation_functions.php"); ?>
 
 <?php
-	$student = find_student_by_id($_GET["id"]);
+	$student = find_student_by_username($_GET["username"]);
 	
 	if (!$student) {
-		// student ID was missing or invalid or
+		// student username was missing or invalid or
 		// student couldn't be found in database
 		redirect_to("manage_students.php");
 	}
@@ -27,14 +27,14 @@
 		if (empty($errors)) {
 			// Perform Update
 			
-			$id = $student["id"];
 			$username = mysql_prep($_POST["username"]);
 			$hashed_password = password_encrypt($_POST["password"]);
+			$studemail = mysql_prep($_POST["studemail"]);
 		
 			$query = "UPDATE users SET ";
 			$query .= "username = '{$username}', ";
-			$query .= "hashed_password = '{$hashed_password}' ";
-			$query .= "WHERE id = {$id} ";
+			$query .= "hashed_password = '{$hashed_password}', ";
+			$query .= "studemail = '{$studemail}', ";
 			$query .= "AND user_role = 'student' ";
 			$query .= "LIMIT 1";
 			$result = mysqli_query($connection, $query);
@@ -67,10 +67,13 @@
 		<?php echo form_errors($errors); ?>
 		
 		<h2>Edit Student: <?php echo htmlentities($student["username"]); ?></h2>
-		<form action="edit_student.php?id=<?php echo urlencode($student["id"]); ?>" method = "POST">
+		<form action="edit_student.php?username=<?php echo urlencode($student["username"]); ?>" method = "POST">
 			<p>Username:
 				<input type="text" name="username" value="<?php echo htmlentities($student["username"]); ?>" />
 			</p>
+			<p>Email:
+                <input type="email" name="studemail" value="<?php echo htmlentities($student["email"]); ?>" />
+            </p>
 			<p>Password:
 				<input type="password" name="password" value="" />
 			</p>

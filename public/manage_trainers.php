@@ -25,8 +25,8 @@
 		<?php while($trainer = mysqli_fetch_assoc($trainer_set)) { ?>
 			<tr>
 				<td><?php echo htmlentities($trainer["username"]); ?></td>
-				<td><a href="edit_trainer.php?id=<?php echo urlencode($trainer["username"]); ?>">Edit</a></td>
-				<td><a href="delete_trainer.php?id=<?php echo urlencode($trainer["username"]); ?>" onclick="return confirm('Are you sure?');">Delete</a></td>
+				<td><a href="edit_trainer.php?username=<?php echo urlencode($trainer["username"]); ?>">Edit</a></td>
+				<td><a href="delete_trainer.php?username=<?php echo urlencode($trainer["username"]); ?>" onclick="return confirm('Are you sure?');">Delete</a></td>
 			</tr>
 		<?php } ?>
 		</table>

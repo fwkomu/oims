@@ -25,8 +25,8 @@
 		<?php while($student = mysqli_fetch_assoc($student_set)) { ?>
 			<tr>
 				<td><?php echo htmlentities($student["username"]); ?></td>
-				<td><a href="edit_student.php?id=<?php echo urlencode($student["username"]); ?>">Edit</a></td>
-				<td><a href="delete_student.php?id=<?php echo urlencode($student["username"]); ?>" onclick="return confirm('Are you sure?');">Delete</a></td>
+				<td><a href="edit_student.php?username=<?php echo urlencode($student["username"]); ?>">Edit</a></td>
+				<td><a href="delete_student.php?username=<?php echo urlencode($student["username"]); ?>" onclick="return confirm('Are you sure?');">Delete</a></td>
 			</tr>
 		<?php } ?>
 		</table>

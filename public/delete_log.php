@@ -3,7 +3,7 @@
 <?php require_once("../includes/functions.php"); ?>
 
 <?php
-	$log = find_log_by_date($_GET["id"]);
+	$log = find_log_by_date($_GET["username"]);
 	if (!$log) {
 		// trainer ID was missing or invalid or
 		// trainer couldn't be found in database

@@ -14,15 +14,15 @@
 		<p>Welcome to the trainer area, <?php echo htmlentities($_SESSION["username"]); ?>.</a> </p>
 		
 		<!--Dashboard boxes code-->
-		<a href="logs.php">
+		<a href="logs_trainer.php">
 			<div class="dashboard" id="manage_admins" align="center">
 				<i class="fa fa-eye fa-2x"><br /><b align="center">View Logs</b></i>
 			</div>
 		</a>
 
-		<a href="#.php">
+		<a href="ratings_view_train.php">
 			<div class="dashboard" id="manage_students" align="center">
-				<i class="fa fa-calendar-check-o fa-2x"><br /><b align="center">Rate Student</b></i>
+				<i class="fa fa-chart-bar fa-2x"><br /><b align="center">Student Ratings</b></i>
 			</div>
 		</a>
 	</div>
