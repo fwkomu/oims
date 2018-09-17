@@ -4,8 +4,8 @@
 <?php require_once("../includes/validation_functions.php"); ?>
 
 <?php
-	$admin = find_admin_by_id($_GET["id"]);
-	
+	$admin = find_user_by_id($_GET["id"]);
+
 	if (!$admin) {
 		// admin ID was missing or invalid or
 		// admin couldn't be found in database
@@ -27,14 +27,14 @@
 		if (empty($errors)) {
 			// Perform Update
 			
-			$id = $admin["id"];
+			$id = $admin["username"];
 			$username = mysql_prep($_POST["username"]);
 			$hashed_password = password_encrypt($_POST["password"]);
 		
 			$query = "UPDATE users SET ";
 			$query .= "username = '{$username}', ";
 			$query .= "hashed_password = '{$hashed_password}' ";
-			$query .= "WHERE id = {$id} ";
+			$query .= "WHERE username = '{$id}' ";
 			$query .= "AND user_role = 'admin' ";
 			$query .= "LIMIT 1";
 			$result = mysqli_query($connection, $query);
@@ -67,12 +67,12 @@
 		<?php echo form_errors($errors); ?>
 		
 		<h2>Edit Admin: <?php echo htmlentities($admin["username"]); ?></h2>
-		<form action="edit_admin.php?id=<?php echo urlencode($admin["id"]); ?>" method = "POST">
+		<form action="edit_admin.php?id=<?php echo urlencode($admin["username"]); ?>" method="POST">
 			<p>Username:
-				<input type="text" name="username" value="<?php echo htmlentities($admin["username"]); ?>" />
+				<input type="text" name="username" required value="<?php echo htmlentities($admin["username"]); ?>" />
 			</p>
 			<p>Password:
-				<input type="password" name="password" value="" />
+				<input type="password" name="password" value="" required />
 			</p>
 			<input type="submit" name="submit" value="Edit Admin" />
 		</form>

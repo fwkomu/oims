@@ -3,15 +3,15 @@
 <?php require_once("../includes/functions.php"); ?>
 
 <?php
-	$admin = find_admin_by_id($_GET["id"]);
+	$admin = find_user_by_id($_GET["id"]);
 	if (!$admin) {
 		// admin ID was missing or invalid or
 		// admin couldn't be found in database
 		redirect_to("manage_admins.php");
 	}
 			
-			$id = $admin["id"];
-			$query = "DELETE from users WHERE id = {$id} AND user_role = 'admin' LIMIT 1";
+			$id = $admin["username"];
+			$query = "DELETE from users WHERE username = '{$id}' AND user_role = 'admin' LIMIT 1";
 			$result = mysqli_query($connection, $query);
 			
 			if($result && mysqli_affected_rows($connection) == 1) {

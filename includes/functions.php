@@ -248,6 +248,24 @@ function find_supervisor_by_username( $supervisor_username ) {
 	}
 }
 
+function find_user_by_id( $user_id ) {
+	global $connection;
+
+	$safe_user_id = mysqli_real_escape_string( $connection, $user_id );
+
+	$query       = "SELECT * ";
+	$query       .= "FROM users ";
+	$query       .= "WHERE username = '{$safe_user_id}' ";
+	$query       .= "LIMIT 1";
+	$user_set = mysqli_query( $connection, $query );
+	confirm_query_v2( $user_set );
+	if ( $user = mysqli_fetch_assoc( $user_set ) ) {
+		return $user;
+	} else {
+		return null;
+	}
+}
+
 function find_default_page_for_subject( $subject_id ) {
 	$page_set = find_pages_for_subject( $subject_id );
 	if ( $first_page = mysqli_fetch_assoc( $page_set ) ) {
