@@ -62,14 +62,14 @@ if ( isset( $_GET['submit'] ) ) {
     <div id="main">
         <div id="navigation">
             <br/>
-            <a href="student.php">&laquo; Main menu</a><br/>
+            <a href="admin.php">&laquo; Main menu</a><br/>
         </div>
         <div id="page">
 			<?php echo message(); ?>
 			<?php echo form_errors( $errors ); ?>
 
             <h2>View logs</h2>
-            <form action="logs.php" method="GET">
+            <form action="logs_admin.php" method="GET">
 				<?php
 				/*
 				 * Validate previous filter

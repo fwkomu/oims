@@ -22,7 +22,7 @@
 
 		<a href="new_log.php">
 			<div class="dashboard" id="manage_students" align="center">
-				<i class="fa fa-calendar-plus-o fa-2x"><br /><b align="center">Create logs</b></i>
+				<i class="fa fa-file-alt fa-2x"><br /><b align="center">Create logs</b></i>
 			</div>
 		</a>
 
@@ -32,9 +32,9 @@
 			</div>
 		</a>
 
-		<a href="#.php">
+		<a href="ratings_view_stu.php">
 			<div class="dashboard" id="manage_supervisors" align="center">
-				<i class="fa fa-calendar-check-o fa-2x"><br /><b align="center">View Ratings</b></i>
+				<i class="fa fa-chart-bar fa-2x"><br /><b align="center">View Ratings</b></i>
 			</div>
 		</a>
 	</div>

@@ -25,8 +25,8 @@
 		<?php while($admin = mysqli_fetch_assoc($admin_set)) { ?>
 			<tr>
 				<td><?php echo htmlentities($admin["username"]); ?></td>
-				<td><a href="edit_admin.php?id=<?php echo urlencode($admin["username"]); ?>">Edit</a></td>
-				<td><a href="delete_admin.php?id=<?php echo urlencode($admin["username"]); ?>" onclick="return confirm('Are you sure?');">Delete</a></td>
+				<td><a href="edit_admin.php?username=<?php echo urlencode($admin["username"]); ?>">Edit</a></td>
+				<td><a href="delete_admin.php?username=<?php echo urlencode($admin["username"]); ?>" onclick="return confirm('Are you sure?');">Delete</a></td>
 			</tr>
 		<?php } ?>
 		</table>

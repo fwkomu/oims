@@ -43,6 +43,8 @@
 <?php include("../includes/layouts/header.php"); ?>
 <div id="main">
 	<div id="navigation">
+	<br/>
+        <a href="student.php">&laquo; Main menu</a><br/>
 		&nbsp;
 	</div>
 	<div id="page">

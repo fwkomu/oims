@@ -4,10 +4,10 @@
 <?php require_once("../includes/validation_functions.php"); ?>
 
 <?php
-	$trainer = find_trainer_by_id($_GET["id"]);
+	$trainer = find_trainer_by_username($_GET["username"]);
 	
 	if (!$trainer) {
-		// trainer ID was missing or invalid or
+		// trainer username was missing or invalid or
 		// trainer couldn't be found in database
 		redirect_to("manage_trainers.php");
 	}
@@ -27,14 +27,15 @@
 		if (empty($errors)) {
 			// Perform Update
 			
-			$id = $trainer["id"];
+			//$id = $trainer["id"];
 			$username = mysql_prep($_POST["username"]);
 			$hashed_password = password_encrypt($_POST["password"]);
+			$trainermail = mysql_prep($_POST["trainermail"]);
 		
 			$query = "UPDATE users SET ";
 			$query .= "username = '{$username}', ";
 			$query .= "hashed_password = '{$hashed_password}' ";
-			$query .= "WHERE id = {$id} ";
+			$query .= "trainermail = '{$trainermail}', ";
 			$query .= "AND user_role = 'trainer' ";
 			$query .= "LIMIT 1";
 			$result = mysqli_query($connection, $query);
@@ -67,10 +68,13 @@
 		<?php echo form_errors($errors); ?>
 		
 		<h2>Edit Trainer: <?php echo htmlentities($trainer["username"]); ?></h2>
-		<form action="edit_trainer.php?id=<?php echo urlencode($trainer["id"]); ?>" method = "POST">
+		<form action="edit_trainer.php?username=<?php echo urlencode($trainer["username"]); ?>" method = "POST">
 			<p>Username:
 				<input type="text" name="username" value="<?php echo htmlentities($trainer["username"]); ?>" />
 			</p>
+			<p>Email:
+                <input type="email" name="trainermail" value="<?php echo htmlentities($trainer["email"]); ?>" />
+            </p>
 			<p>Password:
 				<input type="password" name="password" value="" />
 			</p>

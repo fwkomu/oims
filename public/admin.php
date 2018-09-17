@@ -35,7 +35,7 @@
 
 		<a href="manage_supervisors.php">
 			<div class="dashboard" id="manage_supervisors" align="center">
-				<i class="fa fa-institution fa-2x"><br /><b align="center">Supervisor Users</b></i>
+				<i class="fa fa-university fa-2x"><br /><b align="center">Supervisor Users</b></i>
 			</div>
 		</a>
 		
@@ -45,15 +45,15 @@
 			</div>
 		</a>
 		
-		<a href="logs.php">
+		<a href="logs_admin.php">
 			<div class="dashboard" id="logs" align="center">
 				<i class="fa fa-eye fa-2x"><br /><b align="center">View Logs</b></i>
 			</div>
 		</a>
 
-		<a href="#.php">
+		<a href="ratings_view_admin.php">
 			<div class="dashboard" id="ratings" align="center">
-				<i class="fa fa-calendar-check-o fa-2x"><br /><b align="center">View Ratings</b></i>
+				<i class="fa fa-chart-bar fa-2x"><br /><b align="center">View Ratings</b></i>
 			</div>
 		</a>
 	</div>

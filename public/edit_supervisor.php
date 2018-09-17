@@ -4,11 +4,11 @@
 <?php require_once("../includes/validation_functions.php"); ?>
 
 <?php
-	$supervisor = find_supervisor_by_id($_GET["id"]);
+	$supervisor = find_supervisor_by_username($_GET["username"]);
 	
 	if (!$supervisor) {
-		// student ID was missing or invalid or
-		// student couldn't be found in database
+		// supervisor username was missing or invalid or
+		// supervisor couldn't be found in database
 		redirect_to("manage_supervisors.php");
 	}
 ?>
@@ -27,14 +27,14 @@
 		if (empty($errors)) {
 			// Perform Update
 			
-			$id = $supervisor["id"];
 			$username = mysql_prep($_POST["username"]);
 			$hashed_password = password_encrypt($_POST["password"]);
+			$supervisormail = mysql_prep($_POST["supervisormail"]);
 		
 			$query = "UPDATE users SET ";
 			$query .= "username = '{$username}', ";
 			$query .= "hashed_password = '{$hashed_password}' ";
-			$query .= "WHERE id = {$id} ";
+			$query .= "supervisormail = '{$supervisormail}', ";
 			$query .= "AND user_role = 'supervisor' ";
 			$query .= "LIMIT 1";
 			$result = mysqli_query($connection, $query);
@@ -67,10 +67,13 @@
 		<?php echo form_errors($errors); ?>
 		
 		<h2>Edit Supervisor: <?php echo htmlentities($supervisor["username"]); ?></h2>
-		<form action="edit_supervisor.php?id=<?php echo urlencode($supervisor["id"]); ?>" method = "POST">
+		<form action="edit_supervisor.php?username=<?php echo urlencode($supervisor["username"]); ?>" method = "POST">
 			<p>Username:
 				<input type="text" name="username" value="<?php echo htmlentities($supervisor["username"]); ?>" />
 			</p>
+			<p>Email:
+                <input type="email" name="supervisormail" value="<?php echo htmlentities($supervisor["email"]); ?>" />
+            </p>
 			<p>Password:
 				<input type="password" name="password" value="" />
 			</p>

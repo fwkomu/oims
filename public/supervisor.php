@@ -14,27 +14,27 @@
 		<p>Welcome to the supervision area, <?php echo htmlentities($_SESSION["username"]); ?>.</a> </p>
 		
 		<!--Dashboard boxes code-->
-		<a href="#">
+		<a href="schedule_view_sup.php">
 			<div class="dashboard" id="manage_admins" align="center">
 				<i class="fa fa-calendar fa-2x"><b align="center"> Supervision Schedule</b></i>
 			</div>
 		</a>
 
-		<a href="logs.php">
+		<a href="logs_sup.php">
 			<div class="dashboard" id="manage_students" align="center">
 				<i class="fa fa-eye fa-2x"><br /><b align="center">View Logs</b></i>
 			</div>
 		</a>
 		
-		<a href="new_log.php">
-			<div class="dashboard" id="manage_trainers" align="center">
+		<!--<a href="new_log.php">
+			<div class="dashboard" id="manage_supervisors" align="center">
 				<i class="fa fa-eye fa-2x"><br /><b align="center">Trainer Ratings</b></i>
 			</div>
-		</a>
+		</a>-->
 
-		<a href="#.php">
-			<div class="dashboard" id="manage_supervisors" align="center">
-				<i class="fa fa-calendar-check-o fa-2x"><br /><b align="center">Rate Student</b></i>
+		<a href="ratings.php">
+			<div class="dashboard" id="manage_trainers" align="center">
+				<i class="fa fa-chart-bar fa-2x"><br /><b align="center">Rate Student</b></i>
 			</div>
 		</a>
 	</div>
