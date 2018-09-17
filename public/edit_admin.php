@@ -67,7 +67,7 @@
 		<?php echo form_errors($errors); ?>
 		
 		<h2>Edit Admin: <?php echo htmlentities($admin["username"]); ?></h2>
-		<form action="edit_admin.php?id=<?php echo urlencode($admin["username"]); ?>" method="POST">
+		<form action="edit_admin.php?username=<?php echo urlencode($admin["username"]); ?>" method="POST">
 			<p>Username:
 				<input type="text" name="username" required value="<?php echo htmlentities($admin["username"]); ?>" />
 			</p>
