@@ -33,14 +33,14 @@ retrieve_logs_data();
 			$query = "UPDATE pages SET ";
 			$query .= "date = '{$date}', ";
 			$query .= "entry = '{$entry}' ";
-			$query .= "WHERE DATE = {$date} ";
+			$query .= "WHERE DATE = '{$date}' ";
 			$query .= "LIMIT 1";
 			$result = mysqli_query($connection, $query);
 			
 			if($result && mysqli_affected_rows($connection) >= 0) {
 				//Success
 				$_SESSION["message"] = "Log updated.";
-				redirect_to("manage_content.php?page={$id}");
+				redirect_to("logs.php");
 			} else {
 				//Failure
 				$message = "Log update failed.";
@@ -57,7 +57,7 @@ retrieve_logs_data();
 <div id="main">
 	<div id="navigation">
 		<br />
-		<a href="admin.php">&laquo; Main menu</a><br />
+		<a href="student.php">&laquo; Main menu</a><br />
 	</div>
 	<div id="page">
 		<?php echo message(); ?>
@@ -75,7 +75,7 @@ retrieve_logs_data();
                 <h2>Edit <?php echo htmlentities($_SESSION["username"]); ?>'s Log</h2>
 				<form action="edit_log.php" method="POST">
 					<input type="date" name="date" value="" />
-					<input type="submit" name="submit" value="Submit" />
+					<input type="submit" name="submit" value="Retrieve" />
 					<p>
 					Notes on work done: <br />
 						<textarea name="entry" value="<?php echo $rowp['ENTRY']; ?>" rows="20" cols="80"></textarea>
@@ -87,7 +87,7 @@ retrieve_logs_data();
 		<a href="logs.php">Cancel</a>
 		&nbsp;
 		&nbsp;
-		<a href="delete_log.php" onclick="return confirm('Are you sure about deleting this?');">Delete</a>
+		<a href="delete_log.php" onclick="return confirm('Are you sure about deleting this?');">Delete Log</a>
 	</div>
 </div>
 <?php include("../includes/layouts/footer.php"); ?>
