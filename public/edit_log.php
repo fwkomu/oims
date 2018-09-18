@@ -63,6 +63,7 @@ retrieve_logs_data();
 		    $log = find_log_by_user($current_username, $date);
 		}
 	} else {
+		$log = ['ENTRY'=>null];
 		// This is probably a get request
 	} // end: if (isset($_POST['submit']))
 ?>
