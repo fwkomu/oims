@@ -6,6 +6,14 @@
 <?php include( "../includes/layouts/header.php" ); ?>
 
 <?php
+$message = '';
+if (isset($_SESSION["username"])) {
+    $current_username = $_SESSION["username"];
+} else {
+    $current_username = NULL;
+}
+?>
+<?php
 
 /*
  * Fetch students
@@ -19,7 +27,7 @@ if ( isset( $_GET['submit'] ) ) {
 	//Process the form
 
 	// validations
-	$required_fields = array( "date_from", "date_to", "student" );
+	$required_fields = array( "date_from", "date_to" );
 	validate_get_presences( $required_fields );
 
 	if ( empty( $errors ) ) {
@@ -29,11 +37,10 @@ if ( isset( $_GET['submit'] ) ) {
 		 */
 		$date_from      = mysql_prep( $_GET["date_from"] );
 		$date_to        = mysql_prep( $_GET["date_to"] );
-		$student_picked = mysql_prep( $_GET["student"] );
-
+		
 		// SELECT entry FROM logs
 		$query = "SELECT * FROM logs ";
-		$query .= "WHERE username='" . $student_picked . "' AND DATE >= '" . $date_from . "' AND DATE <= '" . $date_to . "'";
+		$query .= "WHERE username='" . $current_username . "' AND DATE >= '" . $date_from . "' AND DATE <= '" . $date_to . "'";
 
 		$result = mysqli_query( $connection, $query );
 
@@ -87,21 +94,10 @@ if ( isset( $_GET['submit'] ) ) {
 				} else {
 					$date_to_default = date( "Y-m-d" );
 				}
-				// student
-				if ( isset($_GET['student']) ) {
-					$student_default = $_GET['student'];
-				} else {
-					$student_default = false;
-				}
 
 				?>
                 <label>Student</label>
-                <select name="student" required>
-                    <option disabled selected>Select a student</option>
-					<?php while ( $student = mysqli_fetch_assoc( $student_set ) ) { ?>
-                        <option <?php if ($student_default == $student['username']) echo 'selected' ?> value="<?= $student['username'] ?>"><?= $student['username'] ?></option>
-					<?php } ?>
-                </select>
+                <input type="text" name="student" value="<?php echo $current_username; ?>" disabled></textarea>
                 <label>From</label>
                 <input type="date" name="date_from" value="<?php echo $date_from_default; ?>"/>
                 <label>To</label>
@@ -120,7 +116,7 @@ if ( isset( $_GET['submit'] ) ) {
 					if ( $result ) {
 						while ( $log = mysqli_fetch_assoc( $result ) ) { ?>
                             <tr>
-                                <td><?= $log["username"] ?></td>
+                                <td><?= $current_username ?></td>
                                 <td><?= $log['DATE'] ?></td>
                                 <td><?= $log['ENTRY'] ?></td>
                             </tr>
@@ -138,6 +134,10 @@ if ( isset( $_GET['submit'] ) ) {
                 <br/>
             </form>
             <br/>
+			<a href="edit_log.php">Edit log</a>
+			&nbsp;
+			&nbsp;
+			<!--<a href="delete_log.php">Delete log</a>-->
 
         </div>
     </div>

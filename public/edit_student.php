@@ -4,7 +4,7 @@
 <?php require_once("../includes/validation_functions.php"); ?>
 
 <?php
-	$student = find_student_by_username($_GET["username"]);
+	$student = find_user_by_id($_GET["username"]);
 	
 	if (!$student) {
 		// student username was missing or invalid or
@@ -18,7 +18,7 @@
 		//Process the form
 		
 		// validations
-		$required_fields = array("username", "password");
+		$required_fields = array("username", "email", "password");
 		validate_presences($required_fields);
 		
 		$fields_with_max_lengths = array("username" => 30);
@@ -27,14 +27,16 @@
 		if (empty($errors)) {
 			// Perform Update
 			
+			$id = $student["username"];
 			$username = mysql_prep($_POST["username"]);
 			$hashed_password = password_encrypt($_POST["password"]);
-			$studemail = mysql_prep($_POST["studemail"]);
+			$email = mysql_prep($_POST["email"]);
 		
 			$query = "UPDATE users SET ";
 			$query .= "username = '{$username}', ";
-			$query .= "hashed_password = '{$hashed_password}', ";
-			$query .= "studemail = '{$studemail}', ";
+			$query .= "email = '{$email}', ";
+			$query .= "hashed_password = '{$hashed_password}' ";
+			$query .= "WHERE username = '{$id}' ";
 			$query .= "AND user_role = 'student' ";
 			$query .= "LIMIT 1";
 			$result = mysqli_query($connection, $query);
@@ -72,7 +74,7 @@
 				<input type="text" name="username" value="<?php echo htmlentities($student["username"]); ?>" />
 			</p>
 			<p>Email:
-                <input type="email" name="studemail" value="<?php echo htmlentities($student["email"]); ?>" />
+                <input type="email" name="email" value="<?php echo htmlentities($student["email"]); ?>" />
             </p>
 			<p>Password:
 				<input type="password" name="password" value="" />
