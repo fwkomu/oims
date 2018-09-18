@@ -46,6 +46,21 @@ retrieve_logs_data();
 				$message = "Log update failed.";
 			}
 		}
+	} elseif (isset($_GET['submit'])) {
+		//Process the form
+
+		$date = mysql_prep($_GET["fetch_date"]);
+
+		// validations
+		$required_fields = array("fetch_date",);
+		validate_get_presences($required_fields);
+
+		if (empty($errors)) {
+
+		    /*
+		     * Todo retrieve log
+		     */
+		}
 	} else {
 		// This is probably a get request
 	} // end: if (isset($_POST['submit']))
@@ -73,9 +88,12 @@ retrieve_logs_data();
             $rowp = mysqli_fetch_assoc($logscheck);
         ?>
                 <h2>Edit <?php echo htmlentities($_SESSION["username"]); ?>'s Log</h2>
+        <form action="edit_log.php" method="GET">
+            <input type="date" name="fetch_date" value="" />
+            <input type="submit" name="submit" value="Retrieve" />
+        </form>
 				<form action="edit_log.php" method="POST">
-					<input type="date" name="date" value="" />
-					<input type="submit" name="submit" value="Retrieve" />
+                    <input type="hidden" name="date" value="<?= $_GET['fetch_date'] ?>" />
 					<p>
 					Notes on work done: <br />
 						<textarea name="entry" value="<?php echo $rowp['ENTRY']; ?>" rows="20" cols="80"></textarea>
