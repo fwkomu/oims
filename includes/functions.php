@@ -265,6 +265,23 @@ function find_user_by_id( $user_id ) {
 		return null;
 	}
 }
+function find_log_by_user( $user_id, $date ) {
+	global $connection;
+
+	$safe_user_id = mysqli_real_escape_string( $connection, $user_id );
+
+	$query       = "SELECT * ";
+	$query       .= "FROM logs ";
+	$query       .= "WHERE username = '{$safe_user_id}' AND date = '{$date}' ";
+	$query       .= "LIMIT 1";
+	$log_set = mysqli_query( $connection, $query );
+	confirm_query_v2( $log_set );
+	if ( $log = mysqli_fetch_assoc( $log_set ) ) {
+		return $log;
+	} else {
+		return null;
+	}
+}
 
 function find_default_page_for_subject( $subject_id ) {
 	$page_set = find_pages_for_subject( $subject_id );

@@ -60,6 +60,7 @@ retrieve_logs_data();
 		    /*
 		     * Todo retrieve log
 		     */
+		    $log = find_log_by_user($current_username, $date);
 		}
 	} else {
 		// This is probably a get request
@@ -96,7 +97,7 @@ retrieve_logs_data();
                     <input type="hidden" name="date" value="<?= $_GET['fetch_date'] ?>" />
 					<p>
 					Notes on work done: <br />
-						<textarea name="entry" value="<?php echo $rowp['ENTRY']; ?>" rows="20" cols="80"></textarea>
+						<textarea name="entry" value="<?= $log['ENTRY']; ?>" rows="10" cols="80"><?= $log['ENTRY']; ?></textarea>
 					</p>
 					<input type="submit" name="submit" value="Edit Log" />
 		<?php } ?>
