@@ -95,7 +95,7 @@ retrieve_logs_data();
             <input type="submit" name="submit" value="Retrieve" />
         </form>
 				<form action="edit_log.php" method="POST">
-                    <input type="hidden" name="date" value="<?= $_GET['fetch_date'] ?>" />
+                    <input type="hidden" name="date" value="<?php if (isset($_GET['fetch_date'])){echo $_GET['fetch_date'];} ?>" />
 					<p>
 					Notes on work done: <br />
 						<textarea name="entry" value="<?= $log['ENTRY']; ?>" rows="10" cols="80"><?= $log['ENTRY']; ?></textarea>
