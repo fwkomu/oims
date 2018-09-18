@@ -62,8 +62,10 @@ retrieve_logs_data();
 
 		if (empty($errors)) {
 		    $log = find_log_by_user($current_username, $date);
+		    if ($log == null){
+			    $log = ['ENTRY'=>"No log for this date"];
+            }
 		} else{
-		    echo "No logs";
 			$log = ['ENTRY'=>"No log date"];
         }
 	} else {
@@ -111,7 +113,7 @@ retrieve_logs_data();
 		<a href="logs.php">Cancel</a>
 		&nbsp;
 		&nbsp;
-		<a href="delete_log.php" onclick="return confirm('Are you sure about deleting this?');">Delete Log</a>
+		<a href="delete_log.php?fetch_date=<?php if (isset($_GET['fetch_date'])){echo $_GET['fetch_date'];} ?>" onclick="return confirm('Are you sure about deleting this?');">Delete Log</a>
 	</div>
 </div>
 <?php include("../includes/layouts/footer.php"); ?>

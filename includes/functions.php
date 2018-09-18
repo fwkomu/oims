@@ -279,7 +279,7 @@ function find_log_by_user( $user_id, $date ) {
 	if ( $log = mysqli_fetch_assoc( $log_set ) ) {
 		return $log;
 	} else {
-		return $query;
+		return null;
 	}
 }
 
