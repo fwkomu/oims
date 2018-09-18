@@ -272,14 +272,14 @@ function find_log_by_user( $user_id, $date ) {
 
 	$query       = "SELECT * ";
 	$query       .= "FROM logs ";
-	$query       .= "WHERE username = '{$safe_user_id}' AND date = '{$date}' ";
+	$query       .= "WHERE username = '{$safe_user_id}' AND DATE = '{$date}' ";
 	$query       .= "LIMIT 1";
 	$log_set = mysqli_query( $connection, $query );
 	confirm_query_v2( $log_set );
 	if ( $log = mysqli_fetch_assoc( $log_set ) ) {
 		return $log;
 	} else {
-		return null;
+		return $query;
 	}
 }
 

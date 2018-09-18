@@ -30,23 +30,28 @@ retrieve_logs_data();
 		if (empty($errors)) {
 			
 			// Perform Update			
-			$query = "UPDATE pages SET ";
-			$query .= "date = '{$date}', ";
-			$query .= "entry = '{$entry}' ";
-			$query .= "WHERE DATE = '{$date}' ";
+			$query = "UPDATE logs SET ";
+			$query .= "ENTRY = '{$entry}' ";
+			$query .= "WHERE DATE = '{$date}' AND username='{$current_username}'";
 			$query .= "LIMIT 1";
 			$result = mysqli_query($connection, $query);
+
+			$log = find_log_by_user($current_username, $date);
+
 			
 			if($result && mysqli_affected_rows($connection) >= 0) {
 				//Success
 				$_SESSION["message"] = "Log updated.";
 				redirect_to("logs.php");
+
 			} else {
 				//Failure
+				$log = ['ENTRY'=>"No log"];
 				$message = "Log update failed.";
+
 			}
 		}
-	} elseif (isset($_GET['submit'])) {
+	} elseif (isset($_GET['submit_get'])) {
 		//Process the form
 
 		$date = mysql_prep($_GET["fetch_date"]);
@@ -56,14 +61,13 @@ retrieve_logs_data();
 		validate_get_presences($required_fields);
 
 		if (empty($errors)) {
-
-		    /*
-		     * Todo retrieve log
-		     */
 		    $log = find_log_by_user($current_username, $date);
-		}
+		} else{
+		    echo "No logs";
+			$log = ['ENTRY'=>"No log date"];
+        }
 	} else {
-		$log = ['ENTRY'=>null];
+		$log = ['ENTRY'=>"No log"];
 		// This is probably a get request
 	} // end: if (isset($_POST['submit']))
 ?>
@@ -91,8 +95,8 @@ retrieve_logs_data();
         ?>
                 <h2>Edit <?php echo htmlentities($_SESSION["username"]); ?>'s Log</h2>
         <form action="edit_log.php" method="GET">
-            <input type="date" name="fetch_date" value="" />
-            <input type="submit" name="submit" value="Retrieve" />
+            <input type="date" name="fetch_date" value="<?php if (isset($_GET['fetch_date'])){echo $_GET['fetch_date'];} ?>" />
+            <input type="submit" name="submit_get" value="Retrieve" />
         </form>
 				<form action="edit_log.php" method="POST">
                     <input type="hidden" name="date" value="<?php if (isset($_GET['fetch_date'])){echo $_GET['fetch_date'];} ?>" />
